@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">EatFluencer</string>
+		<string name="kakao_app_key">6bc1808c1066e950fdd738862a5cc325</string>
 </resources>
