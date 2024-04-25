@@ -29,6 +29,7 @@ const App = () => {
   const signInWithKakao = async (): Promise<void> => {
     try {
       const token = await login();
+      console.log('❗️token : ', token);
       setResult(JSON.stringify(token));
     } catch (err) {
       console.error('login err', err);
