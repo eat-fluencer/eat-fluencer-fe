@@ -25,11 +25,12 @@ import {
 
 const App = () => {
   const [result, setResult] = useState<string>('');
+  console.log('result : ', result);
 
   const signInWithKakao = async (): Promise<void> => {
     try {
+      console.log('here~');
       const token = await login();
-      console.log('❗️token : ', token);
       setResult(JSON.stringify(token));
     } catch (err) {
       console.error('login err', err);
