@@ -1,14 +1,14 @@
 import React, {useState, createContext, Dispatch, SetStateAction} from 'react';
 
 type GlobalContextType = {
-  user: string;
-  setUser: Dispatch<SetStateAction<string>>;
+  user: any;
+  setUser: Dispatch<SetStateAction<any>>;
   focusIndex: number;
   setFocusIndex: Dispatch<SetStateAction<number>>;
 };
 
 const Context: GlobalContextType = {
-  user: '',
+  user: {},
   setUser: () => {
     throw new Error();
   },
@@ -21,7 +21,7 @@ const Context: GlobalContextType = {
 export const GlobalContext = createContext(Context);
 
 export function ContextProvider({children}: {children: React.ReactNode}) {
-  const [user, setUser] = useState('');
+  const [user, setUser] = useState({});
   const [focusIndex, setFocusIndex] = useState(-2);
 
   const contextValue = {

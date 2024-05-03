@@ -18,7 +18,8 @@ function AppInner() {
   const Tab = createBottomTabNavigator();
   const Stack = createNativeStackNavigator<RootStackParamList>();
   const {user} = useContext(GlobalContext);
-  const isLoggedIn = user.length > 0;
+  const isLoggedIn = !!user.existedUser;
+  console.log('❗️❗️❗️❗️❗️❗️❗️❗️❗️', isLoggedIn);
 
   return (
     <NavigationContainer>

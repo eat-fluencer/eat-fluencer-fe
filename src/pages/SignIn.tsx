@@ -17,60 +17,49 @@ export type RootStackParamList = {
 type SignInScreenProps = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
 
 function SignIn({navigation}: SignInScreenProps) {
-  const {setUser, user} = useContext(GlobalContext);
-
-  console.log(user);
+  const {setUser} = useContext(GlobalContext);
 
   const signInWithKakao = async (): Promise<void> => {
     try {
-      const kakaoResponse = await login();
-      console.log(JSON.stringify(kakaoResponse, null, '\t'));
-
+      const {idToken} = await login();
+      // console.log(JSON.stringify(idToken, null, '\t'));
+      // console.log(idToken);
       // 프로필 조회
       const profile = await getKakaoProfile();
-      console.log(JSON.stringify(profile, null, '\t'));
+      // console.log(JSON.stringify(profile, null, '\t'));
 
       const {data} = await axios.post(
         `${Config.API_URL}/users/registration-status`,
         {
-          providerId: profile?.id,
+          provider_id: profile?.id,
           provider: 'kakao',
         },
       );
-      const existedUser = data.signedUp;
+      console.log(JSON.stringify(data, null, '\t'));
+
+      // console.log({
+      //   kakaoToken: idToken,
+      //   id: profile.id,
+      //   nickname: profile.nickname,
+      //   picture: profile.profileImageUrl,
+      // });
+
+      const existedUser = data.data.signedUp;
+
+      console.log('existedUser ', existedUser);
+      setUser({
+        kakaoToken: idToken,
+        id: profile.id,
+        nickname: profile.nickname,
+        picture: profile.profileImageUrl,
+        existedUser,
+      });
 
       if (!existedUser) {
         navigation.navigate('SignUp');
-      } else {
-        Alert.alert('로그인');
       }
-
-      console.log(JSON.stringify(data, null, '\t'));
-
-      // console.log(JSON.stringify(data, null, '\t'));
-
-      // const {accessToken, idToken} = await login();
-      // console.log('accessToken ', accessToken);
-      // console.log('idToken ', idToken);
-
-      // console.log(`${Config.API_URL}/kakao/user-info`);
-      // const {data} = await axios.get(`${Config.API_URL}/kakao/user-info`, {
-      //   headers: {
-      //     'OAuth2-Access-Token': accessToken,
-      //     'OAuth2-Id-Token': idToken,
-      //   },
-      // });
-      // console.log(JSON.stringify(data, null, '\t'));
-      // TODO: context api에 정보 저장
-      // setUser(data.user_info);
-      // const isRegistered = false;
-
-      // if (!isRegistered) {
-      //   navigation.navigate('SignUp');
-      // }
     } catch (err) {
       console.error('login err', err);
-      // console.error('login err', JSON.stringify(err));
     }
   };
 
