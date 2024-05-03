@@ -196,6 +196,8 @@
 			dependencies = (
 			);
 			name = EatFluencer;
+			packageProductDependencies = (
+			);
 			productName = EatFluencer;
 			productReference = 13B07F961A680F5B00A75B9A /* EatFluencer.app */;
 			productType = "com.apple.product-type.application";
@@ -226,6 +228,8 @@
 				Base,
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
+			packageReferences = (
+			);
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";

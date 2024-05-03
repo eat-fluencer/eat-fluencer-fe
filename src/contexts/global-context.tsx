@@ -1,15 +1,15 @@
 import React, {useState, createContext, Dispatch, SetStateAction} from 'react';
 
 type GlobalContextType = {
-  isSearchFocus: boolean;
-  setIsSearchFocus: Dispatch<SetStateAction<boolean>>;
+  user: any;
+  setUser: Dispatch<SetStateAction<any>>;
   focusIndex: number;
   setFocusIndex: Dispatch<SetStateAction<number>>;
 };
 
 const Context: GlobalContextType = {
-  isSearchFocus: false,
-  setIsSearchFocus: () => {
+  user: {},
+  setUser: () => {
     throw new Error();
   },
   focusIndex: 0,
@@ -21,12 +21,12 @@ const Context: GlobalContextType = {
 export const GlobalContext = createContext(Context);
 
 export function ContextProvider({children}: {children: React.ReactNode}) {
-  const [isSearchFocus, setIsSearchFocus] = useState(false);
+  const [user, setUser] = useState({});
   const [focusIndex, setFocusIndex] = useState(-2);
 
   const contextValue = {
-    isSearchFocus,
-    setIsSearchFocus,
+    user,
+    setUser,
     focusIndex,
     setFocusIndex,
   };
